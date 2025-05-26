@@ -1,36 +1,3 @@
-# class Account:
-#     def __init__(self, name):
-#         self.name = name
-#         self.withdraws = []
-#         self.deposits =[]
-#         self.balance = 0
-#     def get_balance(self):
-#         if sum(self.deposits) >= sum(self.withdraws):
-#             print(f" Hello {self.name}, Your balance is {sum(self.deposits) - sum (self.withdraws)}")
-#         else:
-#             print(f"Hello {self.name},You have {self.balance * -1} loan")
-
-#     def deposit(self, amount):
-#         if amount> 0:
-#             self.deposits.append(amount)
-#             self.balance = sum(self.deposits) - sum (self.withdraws)
-#             print(f" Hello {self.name}, Your current balance is {self.balance}")
-#         else:
-#             print(f"You have put invalid amount")
-            
-#     def withdraw(self, amount):
-#         if self.balance <= amount:
-#             print(f"Sorry, your balance is insuffiecient")
-#         else:
-#             self.withdraws.append(amount)
-#             print(f" Hello {self.name}, Your new balance is {sum(self.deposits) - sum (self.withdraws)}")
-
-# customer = Account(name = "Tirsit")
-# customer.get_balance()
-# customer.deposit(90000)
-# customer.withdraw(30000)
-
-
 class Account:
     def __init__(self, name):
         self.name = name
@@ -47,13 +14,12 @@ class Account:
     def deposit(self, amount):
         if amount <= 0:
             return "The deposited amount is invalid"
-        if amount>0
+        if amount>0:
         self.deposits.append(amount)
         self.balance += amount
-        return f"{amount} deposited successfully. New balance: {self.balance}"
+        return f"{amount} deposited successfully. Your new balance is {self.balance}"
 
     def withdraw(self, amount):
-        if self._is_active(): return self._is_active()
         if amount <= 0:
             return "You can't withdraw a negative amount."
         if self.balance - amount < self.min_balance:
@@ -61,8 +27,8 @@ class Account:
         self.withdrawals.append(amount)
         self.balance -= amount
         return f"{amount} withdrawn successfully. New balance: {self.balance}"
-    def transfer(self, amount, user_account):
-        if self._is_active(): return self._is_active()
+
+    def transfer(self, amount, user_account):    
         if amount <= 0:
             return "You can't transfer a negative amount."
         if self.balance - amount < self.min_balance:
@@ -71,26 +37,25 @@ class Account:
         self.balance -= amount
         user_account.deposit(amount)
         return f"{amount} transferred to {user_account.name}. New balance: {self.balance}"
+
     def get_balance(self):
-        return f"Current balance: {self.balance}"
+        return f"Your current balance is {self.balance}"
         
     def request_loan(self, amount):
-        if self._is_active(): return self._is_active()
         if amount <= 0:
-            return "You can't request a negative loan."
+            return "Invalid loan amount"
         self.loans.append(amount)
         self.balance += amount
         return f"Loan of {amount} approved. New balance: {self.balance}"
 
     def repay_loan(self, amount):
-        if self._is_active(): return self._is_active()
         if amount <= 0:
             return "You can't repay a negative amount."
         if sum(self.loans) == 0:
-            return "You have no unpaid loans."
+            return "You have no loans."
         self.loan_repayments.append(amount)
         self.balance -= amount
-        return f"Loan repayment of {amount} successful. Remaining loan: {sum(self.loans) - sum(self.loan_repayments)}"
+        return f"You paid {amount} successful. Your remaining loan: {sum(self.loans) - sum(self.loan_repayments)}"
 
     def view_account_details(self):
         return f"Account Owner: {self.name}\nBalance: {self.balance}"
@@ -123,7 +88,6 @@ class Account:
         print(f"Remaining Loan: {sum(self.loans) - sum(self.loan_repayments)}")
 
     def apply_interest(self):
-        if self._is_active(): return self._is_active()
         interest = self.balance * 0.05
         self.balance += interest
         return f"Interest of {interest} applied. New balance: {self.balance}"
