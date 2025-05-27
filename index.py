@@ -13,7 +13,7 @@ class Account:
         if amount > 0 and not self.frozen and not self.closed:
             self.deposits.append(amount)
             self.balance += amount
-            return f"{self.owner}, you've deposited {amount}. New balance is {self.balance}."
+            return f"{self.owner}, you've deposited {amount}. Your new balance is {self.balance}."
         return "Deposit failed. Amount must be positive and account must be active."
 
     def withdraw(self, amount):
@@ -22,7 +22,7 @@ class Account:
         if amount > 0 and self.balance - amount >= self.min_balance:
             self.withdrawals.append(amount)
             self.balance -= amount
-            return f"{self.owner}, you've withdrawn {amount}. New balance is {self.balance}."
+            return f" Dear {self.owner}, you've withdrawn {amount}. Your new balance is {self.balance}."
         return "Withdrawal failed. Insufficient balance or below minimum balance."
 
     def transfer_funds(self, amount, recipient_account):
@@ -31,7 +31,7 @@ class Account:
         if amount > 0 and self.balance - amount >= self.min_balance:
             self.withdraw(amount)
             recipient_account.deposit(amount)
-            return f"Transferred {amount} to {recipient_account.owner}."
+            return f" You transferred {amount} to {recipient_account.owner}."
         return "Transfer failed due to insufficient funds or restrictions."
 
     def get_balance(self):
@@ -41,15 +41,15 @@ class Account:
         if amount > 0 and not self.frozen and not self.closed:
             self.loan += amount
             self.balance += amount
-            return f"Loan of {amount} approved. New balance is {self.balance}."
-        return "Loan request failed."
+            return f" Your loan request of {amount} approved. Your new balance is {self.balance}."
+        return "Your loan request failed."
 
     def repay_loan(self, amount):
         if amount > 0 and not self.frozen and not self.closed:
             if amount >= self.loan:
                 self.balance -= self.loan
                 self.loan = 0
-                return "Loan fully repaid."
+                return "Your loan is fully repaid."
             else:
                 self.loan -= amount
                 self.balance -= amount
